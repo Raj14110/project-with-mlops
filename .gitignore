@@ -1,2 +1,2 @@
 venv
-project_mlops.egg-info/
+*.egg-info/
