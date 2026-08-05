@@ -1,4 +1,8 @@
 python-dotenv
 pandas 
 numpy
- 
+pymongo
+certifi
+ -e .
+ ## this -e. refers to the setup.py
+ ## without this the separate project-mlops.egg-info folder would not be created
