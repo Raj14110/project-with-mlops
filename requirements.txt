@@ -3,6 +3,9 @@ pandas
 numpy
 pymongo
 certifi
+pymongo[srv]==3.12
+
+
  -e .
  ## this -e. refers to the setup.py
  ## without this the separate project-mlops.egg-info folder would not be created
