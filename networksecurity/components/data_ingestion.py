@@ -36,7 +36,10 @@ class DataIngestion:
             self.mongo_client=pymongo.MongoClient(MONGO_DB_URL)
             collection=self.mongo_client[database_name][collection_name]
 
+            """look into push_data.py to underdtand these above 4 lines"""
+
             df=pd.DataFrame(list(collection.find()))
+            """look into knowledge.txt"""
             if "_id" in df.columns.to_list():
                 df=df.drop(columns=["_id"],axis=1)
             

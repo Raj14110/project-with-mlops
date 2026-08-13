@@ -1,20 +1,37 @@
 from networksecurity.components.data_ingestion import DataIngestion
+from networksecurity.components.data_validation import DataValidation
 
+from networksecurity.components.data_tranformation import DataTransformation
+from networksecurity.entity.config_entity import DataTransformationConfig
 from networksecurity.exception.exception import proj_exception
 from networksecurity.logging.logger import logging
 
-from networksecurity.entity.config_entity import DataIngestionConfig
+from networksecurity.entity.config_entity import DataIngestionConfig,DataValidationConfig
 from networksecurity.entity.config_entity import TrainingPipelineConfig
 import sys
 
 if __name__=="__main__":
     try:
-        traininfpipelineconfig=TrainingPipelineConfig()
-        dataingestionconfig=DataIngestionConfig(traininfpipelineconfig)
+        trainingpipelineconfig=TrainingPipelineConfig()
+        dataingestionconfig=DataIngestionConfig(trainingpipelineconfig)
         data_ingestion=DataIngestion(dataingestionconfig)
         logging.info("initiate data ingestion")
         dataingestionartifact=data_ingestion.initiate_data_ingestion()
         print(dataingestionartifact)
+        logging.info("data ingestion completed")
+
+        datavalidationconfig=DataValidationConfig(trainingpipelineconfig)
+        data_validation=DataValidation(dataingestionartifact,datavalidationconfig)
+        logging.info("initiate data validation")
+        data_validation_artifact=data_validation.initiate_data_validation()
+        logging.info("data validation completed")
+        print(data_validation_artifact)
+        logging.info("data transf started")
+        data_transformation_config=DataTransformationConfig(trainingpipelineconfig)
+        data_transformation=DataTransformation(data_validation_artifact,data_transformation_config)
+        data_transformation_artifact=data_transformation.initiate_data_transformation()
+        print(data_transformation_artifact)
+        logging.info("data trnasf completed")
 
 
     except Exception as e:
