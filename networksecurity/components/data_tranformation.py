@@ -50,10 +50,32 @@ class DataTransformation:
         )
         try:
            imputer:KNNImputer=KNNImputer(**DATA_TRANSFORMATION_IMPUTER_PARAMS)
+        #    Think of it like this
+                # params = {
+                #     "a": 10,
+                #     "b": 20
+                # }
+
+                # some_function(**params)
+
+                # becomes:
+
+                # some_function(a=10, b=20)
+
+
+
+
            logging.info(
                 f"Initialise KNNImputer with {DATA_TRANSFORMATION_IMPUTER_PARAMS}"
             )
            processor:Pipeline=Pipeline([("imputer",imputer)])
+            # [
+            #     ("imputer", imputer)
+            # ]
+
+            # The tuple has two things:
+
+            # ("name of the step", object performing the step)
            return processor
         except Exception as e:
             raise proj_exception(e,sys)
