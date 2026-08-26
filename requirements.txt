@@ -8,6 +8,10 @@ scikit-learn
 dill
 pyaml
 mlflow
+dagshub
+fastapi
+uvicorn
+python-multipart
 #  -e .
  ## this -e. refers to the setup.py
  ## without this the separate project-mlops.egg-info folder would not be created
